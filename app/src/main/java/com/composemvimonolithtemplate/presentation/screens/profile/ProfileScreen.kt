@@ -1,6 +1,5 @@
 package com.composemvimonolithtemplate.presentation.screens.profile
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,7 +11,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -25,16 +23,12 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ProfileScreen(navController: NavController) {
     val viewModel = koinViewModel<ProfileViewModel>()
-    val context = LocalContext.current
 
     when (val screenState = viewModel.screenState.collectAsState().value) {
         is ProfileScreenState.Loading -> Loading()
         is ProfileScreenState.ShowUserInfo -> ShowUserInfo(
             userInfo = screenState.userInfo,
-            onUpdateUserInfoClick = {
-                viewModel.handleEvent(ProfileScreenEvent.UpdateUserInfo)
-                Toast.makeText(context, "Updating...", Toast.LENGTH_SHORT).show()
-            }
+            onUpdateUserInfoClick = { viewModel.handleEvent(ProfileScreenEvent.UpdateUserInfo) }
         )
     }
 }

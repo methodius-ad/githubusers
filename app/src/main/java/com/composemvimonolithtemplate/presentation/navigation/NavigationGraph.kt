@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.composemvimonolithtemplate.presentation.screens.home.HomeScreen
+import com.composemvimonolithtemplate.presentation.screens.info.InfoScreen
 import com.composemvimonolithtemplate.presentation.screens.profile.ProfileScreen
 
 @Composable
@@ -22,6 +23,9 @@ fun NavigationGraph(navController: NavHostController, innerPadding: PaddingValue
         }
         composable(route = Screen.Profile.route) {
             ProfileScreen(navController = navController)
+        }
+        composable(route = Screen.Info.route) {
+            InfoScreen(navController = navController)
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.composemvimonolithtemplate.presentation.screens.home
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +27,7 @@ import androidx.navigation.NavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.composemvimonolithtemplate.domain.model.UserInfo
+import com.composemvimonolithtemplate.presentation.navigation.Screen
 import com.composemvimonolithtemplate.presentation.theme.Loading
 import org.koin.androidx.compose.koinViewModel
 
@@ -40,9 +40,7 @@ fun HomeScreen(navController: NavController) {
         is HomeScreenState.Loading -> Loading()
         is HomeScreenState.ShowUsers -> ShowUsers(
             users = screenState.users,
-            onUserClick = {
-                Toast.makeText(context, "Navigate to ...", Toast.LENGTH_SHORT).show()
-            }
+            onUserClick = { navController.navigate(Screen.Info.route) }
         )
     }
 }
