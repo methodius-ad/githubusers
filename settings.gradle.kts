@@ -1,3 +1,7 @@
+@file:Suppress("UnstableApiUsage")
+
+enableFeaturePreview("VERSION_CATALOGS")
+
 pluginManagement {
     repositories {
         google()
@@ -5,6 +9,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,5 +17,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "ComposeMviMonolithTemplate"
-include ':app'
+
+include("app")
