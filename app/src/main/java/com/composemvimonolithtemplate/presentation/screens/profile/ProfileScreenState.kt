@@ -1,13 +1,12 @@
 package com.composemvimonolithtemplate.presentation.screens.profile
 
-import com.composemvimonolithtemplate.domain.model.UserInfo
+import com.composemvimonolithtemplate.domain.model.ProfileData
 
-sealed class ProfileScreenState {
-    object Loading : ProfileScreenState()
-    data class ShowUserInfo(val userInfo: UserInfo) : ProfileScreenState()
+sealed interface ProfileScreenState {
+    object Loading : ProfileScreenState
+    data class ShowProfileData(val profileData: ProfileData) : ProfileScreenState
 }
 
-sealed class ProfileScreenEvent {
-    object FetchUserInfo : ProfileScreenEvent()
-    object UpdateUserInfo : ProfileScreenEvent()
+sealed interface ProfileScreenEvent {
+    object FetchProfileData : ProfileScreenEvent
 }

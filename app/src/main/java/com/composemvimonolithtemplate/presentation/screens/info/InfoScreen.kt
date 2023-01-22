@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,14 +16,27 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.composemvimonolithtemplate.domain.model.InfoData
+import com.composemvimonolithtemplate.presentation.theme.Loading
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun InfoScreen(navController: NavController) {
     val viewModel = koinViewModel<InfoScreenViewModel>()
 
+    when (val screenState = viewModel.screenState.collectAsState().value) {
+        is InfoScreenState.Loading -> Loading()
+        is InfoScreenState.ShowInfoData -> ShowInfoData(
+            infoData = screenState.infoData,
+            onBackClick = { navController.popBackStack() }
+        )
+    }
+}
+
+@Composable
+private fun ShowInfoData(infoData: InfoData, onBackClick: () -> Unit) {
     Box {
-        IconButton(onClick = { navController.popBackStack() }) {
+        IconButton(onClick = onBackClick) {
             Image(
                 imageVector = Icons.Filled.ArrowBack,
                 contentDescription = null,
@@ -36,8 +50,7 @@ fun InfoScreen(navController: NavController) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Info Screen \n" +
-                    "Will be implemented :)",
+            text = infoData.title,
             fontSize = 18.sp,
             textAlign = TextAlign.Center
         )

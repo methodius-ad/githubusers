@@ -22,7 +22,7 @@ fun NavigationGraph(navController: NavHostController, innerPadding: PaddingValue
             HomeScreen(navController = navController)
         }
         composable(route = Screen.Profile.route) {
-            ProfileScreen(navController = navController)
+            ProfileScreen()
         }
         composable(route = Screen.Info.route) {
             InfoScreen(navController = navController)

@@ -1,12 +1,14 @@
 package com.composemvimonolithtemplate.domain.repository
 
-import com.composemvimonolithtemplate.domain.model.UserInfo
+import com.composemvimonolithtemplate.domain.model.HomeData
+import com.composemvimonolithtemplate.domain.model.InfoData
+import com.composemvimonolithtemplate.domain.model.ProfileData
 
 interface MockRepository {
 
-    suspend fun getUsers(): List<UserInfo>
+    suspend fun getHomeData(): HomeData
 
-    suspend fun getUserInfo(): UserInfo
+    suspend fun getProfileData(): ProfileData
 
-    suspend fun updateUserInfo(): UserInfo
+    suspend fun getInfoData(): InfoData
 }

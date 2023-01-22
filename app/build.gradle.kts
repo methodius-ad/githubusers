@@ -60,5 +60,4 @@ dependencies {
     implementation(libs.koinAndroid)
     implementation(libs.koinAndroidxCompose)
     implementation(libs.navigationCompose)
-    implementation(libs.glideCompose)
 }
