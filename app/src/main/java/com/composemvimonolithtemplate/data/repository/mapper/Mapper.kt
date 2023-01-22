@@ -5,8 +5,8 @@ import com.composemvimonolithtemplate.domain.model.UserInfo
 
 fun UserInfoResponse.mapToUserInfo(): UserInfo {
     return UserInfo(
-        name = this.name,
-        email = this.email,
-        imageUrl = this.imageUrl
+        name = name,
+        email = email,
+        imageUrl = imageUrl
     )
 }
