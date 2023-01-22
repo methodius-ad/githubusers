@@ -1,5 +1,7 @@
 package com.composemvimonolithtemplate.di
 
 val appModules = listOf(
-    viewModelModule
+    viewModelModule,
+    repositoryModule,
+    useCaseModule
 )
