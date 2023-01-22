@@ -1,0 +1,2 @@
+package com.composemvimonolithtemplate.di
+

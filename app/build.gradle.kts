@@ -56,5 +56,8 @@ dependencies {
     implementation(libs.activityCompose)
     implementation(libs.composeUI)
     implementation(libs.composeUIToolingPreview)
-    implementation(libs.composeMaterial3)
+    implementation(libs.composeMaterial)
+    implementation(libs.koinAndroid)
+    implementation(libs.koinAndroidxCompose)
+    implementation(libs.navigationCompose)
 }
