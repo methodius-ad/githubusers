@@ -36,23 +36,31 @@ private val bottomNavigationItems = listOf(
 
 @Composable
 fun BottomNavigation(navController: NavController) {
-    BottomNavigation {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
-        bottomNavigationItems.forEach { bottomNavigationItem ->
-            BottomNavigationItem(
-                icon = { Icon(bottomNavigationItem.icon, contentDescription = null) },
-                label = { Text(bottomNavigationItem.title) },
-                selected = currentDestination?.hierarchy?.any { navDestination -> navDestination.route == bottomNavigationItem.route } == true,
-                onClick = {
-                    navController.navigate(bottomNavigationItem.route) {
-                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                        launchSingleTop = true
-                        restoreState = true
+    if (isShowBottomNavigation(currentDestination?.route)) {
+        BottomNavigation {
+            bottomNavigationItems.forEach { bottomNavigationItem ->
+                BottomNavigationItem(
+                    icon = { Icon(bottomNavigationItem.icon, contentDescription = null) },
+                    label = { Text(bottomNavigationItem.title) },
+                    selected = currentDestination?.hierarchy?.any { navDestination -> navDestination.route == bottomNavigationItem.route } == true,
+                    onClick = {
+                        navController.navigate(bottomNavigationItem.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
+}
+
+private fun isShowBottomNavigation(currentRoute: String?): Boolean {
+    return currentRoute == Screen.Home.route || currentRoute == Screen.Profile.route
 }
