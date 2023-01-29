@@ -21,14 +21,14 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun HomeScreen(navController: NavController) {
     val viewModel = koinViewModel<HomeViewModel>()
+    val screenState = viewModel.screenState.collectAsState()
 
-    when (val screenState = viewModel.screenState.collectAsState().value) {
-        is HomeScreenState.Loading -> Loading()
-        is HomeScreenState.ShowHomeData -> ShowHomeData(
-            homeData = screenState.homeData,
+    screenState.value.homeData?.let { homeData ->
+        ShowHomeData(
+            homeData = homeData,
             onShowInfoScreenClick = { navController.navigate(Screen.Info.route) }
         )
-    }
+    } ?: Loading()
 }
 
 @Composable

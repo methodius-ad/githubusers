@@ -10,7 +10,7 @@ class InfoScreenViewModelImpl(
     private val getInfoDataUseCase: GetInfoDataUseCase
 ) : InfoScreenViewModel() {
 
-    override val screenState = MutableStateFlow<InfoScreenState>(InfoScreenState.Loading)
+    override val screenState = MutableStateFlow(InfoScreenState.getInitial())
 
     init {
         handleEvent(InfoScreenEvent.FetchInfoData)
@@ -24,8 +24,7 @@ class InfoScreenViewModelImpl(
 
     private fun onFetchInfoData() {
         viewModelScope.launch(Dispatchers.IO) {
-            screenState.emit(InfoScreenState.Loading)
-            screenState.emit(InfoScreenState.ShowInfoData(infoData = getInfoDataUseCase()))
+            screenState.emit(screenState.value.copy(infoData = getInfoDataUseCase()))
         }
     }
 }

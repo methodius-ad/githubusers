@@ -10,7 +10,7 @@ class HomeViewModelImpl(
     private val getHomeDataUseCase: GetHomeDataUseCase
 ) : HomeViewModel() {
 
-    override val screenState = MutableStateFlow<HomeScreenState>(HomeScreenState.Loading)
+    override val screenState = MutableStateFlow(HomeScreenState.getInitial())
 
     init {
         handleEvent(HomeScreenEvent.FetchHomeData)
@@ -24,8 +24,7 @@ class HomeViewModelImpl(
 
     private fun onFetchHomeData() {
         viewModelScope.launch(Dispatchers.IO) {
-            screenState.emit(HomeScreenState.Loading)
-            screenState.emit(HomeScreenState.ShowHomeData(homeData = getHomeDataUseCase()))
+            screenState.emit(screenState.value.copy(homeData = getHomeDataUseCase()))
         }
     }
 }

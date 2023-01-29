@@ -10,7 +10,7 @@ class ProfileViewModelImpl(
     private val getProfileDataUseCase: GetProfileDataUseCase
 ) : ProfileViewModel() {
 
-    override val screenState = MutableStateFlow<ProfileScreenState>(ProfileScreenState.Loading)
+    override val screenState = MutableStateFlow(ProfileScreenState.getInitial())
 
     init {
         handleEvent(ProfileScreenEvent.FetchProfileData)
@@ -24,8 +24,7 @@ class ProfileViewModelImpl(
 
     private fun onFetchProfileData() {
         viewModelScope.launch(Dispatchers.IO) {
-            screenState.emit(ProfileScreenState.Loading)
-            screenState.emit(ProfileScreenState.ShowProfileData(profileData = getProfileDataUseCase()))
+            screenState.emit(screenState.value.copy(profileData = getProfileDataUseCase()))
         }
     }
 }

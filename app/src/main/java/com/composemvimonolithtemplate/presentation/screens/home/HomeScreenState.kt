@@ -2,9 +2,14 @@ package com.composemvimonolithtemplate.presentation.screens.home
 
 import com.composemvimonolithtemplate.domain.model.HomeData
 
-sealed interface HomeScreenState {
-    object Loading : HomeScreenState
-    data class ShowHomeData(val homeData: HomeData) : HomeScreenState
+data class HomeScreenState(
+    val homeData: HomeData?
+) {
+    companion object {
+        fun getInitial(): HomeScreenState {
+            return HomeScreenState(homeData = null)
+        }
+    }
 }
 
 sealed interface HomeScreenEvent {

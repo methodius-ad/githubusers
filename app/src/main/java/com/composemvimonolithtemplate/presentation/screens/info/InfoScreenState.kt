@@ -2,9 +2,14 @@ package com.composemvimonolithtemplate.presentation.screens.info
 
 import com.composemvimonolithtemplate.domain.model.InfoData
 
-sealed interface InfoScreenState {
-    object Loading : InfoScreenState
-    data class ShowInfoData(val infoData: InfoData) : InfoScreenState
+data class InfoScreenState(
+    val infoData: InfoData?
+) {
+    companion object {
+        fun getInitial(): InfoScreenState {
+            return InfoScreenState(infoData = null)
+        }
+    }
 }
 
 sealed interface InfoScreenEvent {

@@ -16,13 +16,11 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ProfileScreen() {
     val viewModel = koinViewModel<ProfileViewModel>()
+    val screenState = viewModel.screenState.collectAsState()
 
-    when (val screenState = viewModel.screenState.collectAsState().value) {
-        is ProfileScreenState.Loading -> Loading()
-        is ProfileScreenState.ShowProfileData -> ShowProfileData(
-            profileData = screenState.profileData
-        )
-    }
+    screenState.value.profileData?.let { profileData ->
+        ShowProfileData(profileData = profileData)
+    } ?: Loading()
 }
 
 @Composable

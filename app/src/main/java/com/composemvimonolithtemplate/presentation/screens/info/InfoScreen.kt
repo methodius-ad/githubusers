@@ -23,14 +23,14 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun InfoScreen(navController: NavController) {
     val viewModel = koinViewModel<InfoScreenViewModel>()
+    val screenState = viewModel.screenState.collectAsState()
 
-    when (val screenState = viewModel.screenState.collectAsState().value) {
-        is InfoScreenState.Loading -> Loading()
-        is InfoScreenState.ShowInfoData -> ShowInfoData(
-            infoData = screenState.infoData,
+    screenState.value.infoData?.let { infoData ->
+        ShowInfoData(
+            infoData = infoData,
             onBackClick = { navController.popBackStack() }
         )
-    }
+    } ?: Loading()
 }
 
 @Composable
