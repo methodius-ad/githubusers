@@ -3,16 +3,17 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.composemvimonolithtemplate"
-    compileSdk = 33
+    namespace = "com.githubusers"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.composemvimonolithtemplate"
-        minSdk = 24
-        targetSdk = 33
+        applicationId = "com.githubusers"
+        minSdk = 29
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -60,4 +61,13 @@ dependencies {
     implementation(libs.koinAndroid)
     implementation(libs.koinAndroidxCompose)
     implementation(libs.navigationCompose)
+    implementation(libs.navigationDynamicFeaturesFragment)
+    implementation(libs.retrofit2)
+    implementation(libs.moshi)
+    implementation(libs.moshiConverter)
+    implementation(libs.moshiKotlin)
+    implementation(libs.coil)
+    implementation(libs.room)
+    implementation(libs.roomKtx)
+    kapt(libs.roomCompiler)
 }
